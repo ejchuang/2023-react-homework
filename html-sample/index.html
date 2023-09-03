@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+  <body>
+
+  <script>
+
+    //axios.http method
+    //Promise 鏈接
+    // axios.get('https://randomuser.me/api/')
+    //     .then((res)=>{
+    //         const{seed} = res.data.info
+    //         console.log(seed);
+    //         console.log(1,res.data);
+    //         return axios.get('https://randomuser.me/api/?seed=' + seed)
+    //     })
+    //     .then((res)=>{
+    //         console.log(2,res.data);
+    //     })
+    //     .catch((err)=>{
+    //         console.log('錯誤',err);
+    //     })
+
+    //Async function 非同步函式 > 函式內的promise可以轉同步
+    //async必須與await搭配
+    const asyncFn = async() =>{
+        const res = await axios.get('https://randomuser.me/api/');
+        console.log(1,res);
+        const{seed} = res.data.info;
+        const res2 = await axios.get('https://randomuser.me/api/');
+        console.log(2,res2);
+    }
+
+    asyncFn();
+
+
+    //IIFE立即函式
+    (async()=>{
+        try {
+            const res = await axios.get('https://randomuser.me/api/');
+            console.log(1,res);
+            const{seed} = res.data.info;
+            const res2 = await axios.get('https://randomuser.me/api/');
+            console.log(2,res2); 
+        } catch (err) {
+            console.log('錯誤',err); 
+        }
+           
+        }
+    )();
+    
+    //Promise物件 > .catch(物件下的catch)
+    //try...catch > 陳述式
+  </script>
+  </body>
+</html>
